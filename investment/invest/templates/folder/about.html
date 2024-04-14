@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Global Investors</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}">
+</head>
+
+
+<!-- header secttion -->
+<header class="header">
+	<a href="#" class="logo"><i class="fa fa-fire"></i>Global Investors</a>
+
+	<div class="icons">
+		<a href="{% url 'invest:home' %}" name="register" id="sign-btn" class="fas fa-home"></a>
+	</div>
+	
+</header>
+
+<body>
+<section class="learnMore">
+
+<h1>18 Years of Experience</h1><br>
+<div><p>
+	Welcome to our investment website, where we strive to provide you with valuable insights, expert analysis, and helpful resources to navigate the world of investing with confidence. Our team of experienced professionals is dedicated to helping you achieve your financial goals by providing timely and accurate information on a wide range of investment options, from stocks and bonds to real estate and cryptocurrencies. We understand that investing can be complex and overwhelming, which is why we aim to simplify the process and empower you to make informed decisions that align with your unique investment objectives.
+</p></div><br>
+
+<div>
+	<img style="width: 80%;" src="{% static 'pu.png' %}">
+</div><br>
+
+<div><p>
+	Whether you are a seasoned investor looking to diversify your portfolio or a beginner seeking guidance on how to get started, our website offers a wealth of educational content, market updates, and investment strategies to help you succeed in achieving financial success. Investing wisely is crucial for building wealth and securing your financial future, and we are here to support you every step of the way. Thank you for choosing us as your trusted source for investment advice and guidance.
+</p></div>
+</section><br>
+
+<!-- footer starts here -->
+<section class="footer">
+	<div class="box-container">
+		<div class="box">
+			<h3>Find Us Here</h3>
+			<p>You can find us through the following link icon of the diifferent social handles below</p>
+			<div class="share">
+				<a href="#" class="fab fa-facebook-f"></a>
+				<a href="#" class="fab fa-twitter"></a>
+				<a href="#" class="fab fa-instagram"></a>
+			</div>
+		</div>
+
+		<div class="box">
+			<h3>Contact Us</h3>
+			<p>+123456789</p>
+			<a href="#" class="link">comeseeme@gmail.com</a>
+		</div>
+
+		<div class="box">
+			<h3>Office</h3>
+			<p>20 road street assumption plaza<br>
+				Texas Jungle<br>
+			United States</p>
+		</div>
+	</div>
+
+	<div class="credit"><span>Nexton</span>
+	</div>
+</section>
+</body>
+</html>

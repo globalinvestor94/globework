@@ -1,0 +1,394 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Global Investors</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}">
+</head>
+
+<body> 
+<!-- header secttion -->
+<header class="header">
+	<a href="#" class="logo"><i class="fa fa-fire"></i>Global Investors</a>
+
+	<nav class="navbar">
+		<a href="#home" class="hover-underline">Home</a>
+		<a href="#about" class="hover-underline">About Us</a>
+		<a href="#testimony" class="hover-underline">Testimonies</a>
+		<a href="#plan" class="hover-underline">Plan</a>
+		<a href="#chat" class="hover-underline">Chat wih Us</a>
+	</nav>
+	{% if request.user.is_authenticated %}
+	<div class="icons">
+		<a href="{% url 'invest:logout' %}" id="sign-btn" class="fa fa-external-link"><span style="font-size:1rem">Logout</span></a>
+		<a href="" style="font-size: 1rem">Welcome {{request.user.username}}</a>
+		<a href="#" id="menu-btn" class="fas fa-bars"> </a>
+	</div>
+	{% else %}
+	<div class="icons">
+		<a href="{% url 'invest:register' %}" name="register" id="sign-btn" class="fas fa-user-plus"><span style="font-size:1rem">Register</span></a>
+		<a href="{% url 'invest:login' %}" name="login" id="login-btn" class="fas fa-user"><span style="font-size:1rem">Login</span></a>
+		<a href="#" id="menu-btn" class="fas fa-bars"> </a>
+	</div>
+	{% endif %}
+
+	<form action="" class="login-form">
+		<h3>Login Form</h3>
+		<input type="email" placeholder="Enter your email" class="box">
+		<input type="password" placeholder="Enter your password" class="box">
+
+		<div class="remember">
+			<input type="checkbox" id="remember">
+			<label for="remember-me">Remember me</label>
+		</div>
+
+		<a href="#" class="btn">
+			<span class="text text-1">login now</span>
+			<span class="text text-2" aria-hidden>login now</span>
+		</a>
+
+	</form>
+
+	
+</header>
+<!-- header section ends -->
+
+<section>
+	{% if messages %}
+        {% for message in messages %}
+      <div class="alert alert-{{message.tag}}">{{message}}</div>
+        {% endfor %}
+        {% endif %}
+
+</section>
+<div class="notification-bar">
+	<p>This is the notification band</p>
+</div>
+
+<div class="notification-bar">
+	<marquee><p>
+		<span style="color: white;" class="fa fa-gift"> Adam Freeborn from South Africa just deposited $300;</span>
+
+		<span style="color: white;" class="fa fa-dollar"> Ariol Pandrol from Turkey just withdraw $800;</span>
+
+		<span style="color: white;" class="fa fa-gift"> Lorient Frank from France just deposited $4000;</span>
+
+		<span style="color: white;" class="fa fa-gift"> Blackman James from United Kingdom just withdraw $1000;</span>
+
+		<span style="color: white;" class="fa fa-dollar"> Ruth Ethum  from Ethiopia just deposited $700;</span>
+
+		<span style="color: white;" class="fa fa-gift"> Adams Becker from Austria just deposited $200;</span>
+
+		<span style="color: white;" class="fa fa-gift"> Frimpong Goddy from Ghana just withdraw $450;</span>
+
+
+
+	</p></marquee>
+</div>
+	
+<!-- home section starts -->
+<section class="home" id="home">
+	<div class="content">
+
+
+
+		<h3>Investor in Your Future</h3>
+		<p style="align-items: justify;"><b>At Global Investors, we are dedicated to empowering individuals to take control of their financial destinies and achieve their long-term investment goals. With a commitment to providing valuable insights, expert analysis, and actionable resources, our platform serves as a trusted guide for navigating the world of investing with confidence.Our team of seasoned professionals brings a wealth of experience and expertise to the table, offering comprehensive guidance on a wide array of investment opportunities.</b> </p>
+
+		<a href="{% url 'invest:learnmore' %}" class="btn">
+			<span class="text text-1">Learn more</span>
+			<span class="text text-2" aria-hidden>Learn more</span>
+		</a>
+	</div>
+
+</section>
+<!-- home section ends -->
+
+<!-- about us section starts here -->
+<section class="about" id="about">
+	<h1 class="heading">About Us</h1>
+	<div class="container">
+		<figure class="about-image">
+			<img src="{% static 'pe.png' %}" alt="" height="500">
+			<img src="{% static 'pu.png' %}" alt="" class="about-img">
+		</figure>
+
+		<div class="about-content">
+			<h3>18 years of experience</h3>
+			<p>Welcome to Global Investors, where we strive to provide you with valuable insights, expert analysis, and helpful resources to navigate the world of investing with confidence.Our team of experienced professionals is dedicated to helping you achieve your financial goals by providing timely and accurate information on a wide range of investment options, from stocks and bonds to real estate and cryptocurrencies.</p>
+
+			<a href="{% url 'invest:about' %}" class="btn">
+			<span class="text text-1">Read more</span>
+			<span class="text text-2" aria-hidden>Read more</span>
+		</a>
+		</div>
+	</div>
+</section> <br>
+<!-- about us section starts here -->
+
+<!-- testimonies starts here -->
+<section class="testimony" id="testimony">
+	<h1 class="heading">User Review</h1>
+	<div class="swiper review-slider">
+		<div class="swiper-wrapper">
+			{% for items in items %}
+			<div class="swiper-slide slide">
+				<p>{{items.testimony}}</p>
+				<div class="wrapper">
+					<div class="seperator"></div>
+					<div class="seperator"></div>
+					<div class="seperator"></div>
+					<div class="seperator"></div>
+					<div class="seperator"></div>
+				</div>
+				<i class="fas fa-quote-right"></i>
+				<div class="user">
+					<img src="{{items.pictures.url}}" alt="">
+					<div class="user-info">
+						<h3>{{items.name}}</h3>
+						<div class="stars">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star-half-alt"></i>
+
+						</div>
+					</div>
+				</div>
+		</div>
+		{% endfor %}
+
+	</div>
+</div>
+</section>
+<!-- testimonies ends here -->
+
+<!-- plans starts here -->
+<section class="plan" id="plan">
+	<h1 class="heading">Plans</h1>
+
+	<div class="box-container">
+		<div class="box">
+			<div class="image shine">
+				<img src="{% static 'beginners.png' %}" alt="">
+				<h3>Beginner</h3>
+			</div>
+			<div class="content">
+				<h4> $100</h4>
+				<p>Maximum: $1,999</p>
+				<h3>Beginners Plan</h3>
+				<div class="stars">
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+					<span>(Profit:5%)</span>
+				</div>
+				<div class="icons">
+					<span><i class="far fa-bookmark"></i>67</span>
+					<span><i class="far fa-clock"></i>Duration: 24 HRS</span>
+				</div>
+
+				<a href="{% url 'invest:beginner' %}" class="btn">
+			<span class="text text-1">Choose plan</span>
+			<span class="text text-2" aria-hidden>Choose plan</span>
+		</a>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="image shine">
+				<img src="{% static 'professional.png' %}" alt="">
+				<h3>Professional</h3>
+			</div>
+			<div class="content">
+				<h4> $3000</h4>
+				<p>Maximum: $14,999</p>
+				<h3>Professional Plan</h3>
+				<div class="stars">
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+					<span>(Profit:8%)</span>
+				</div>
+				<div class="icons">
+					<span><i class="far fa-bookmark"></i>67</span>
+					<span><i class="far fa-clock"></i>Duration: 24 HRS</span>
+				</div>
+
+				<a href="{% url 'invest:professional' %}" class="btn">
+			<span class="text text-1">Choose plan</span>
+			<span class="text text-2" aria-hidden>Choose plan</span>
+		</a>
+			</div>
+		</div>
+
+
+		<div class="box">
+			<div class="image shine">
+				<img src="{% static 'promo.png' %}" alt="">
+				<h3>Promo</h3>
+			</div>
+			<div class="content">
+				<h4> $15,000</h4>
+				<p>Maximum: $29,999</p>
+				<h3>Promo Plan</h3>
+				<div class="stars">
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+					<span>(Profit:11%)</span>
+				</div>
+				<div class="icons">
+					<span><i class="far fa-bookmark"></i>67</span>
+					<span><i class="far fa-clock"></i>Duration: 24 HRS</span>
+				</div>
+
+				<a href="{% url 'invest:promo' %}" class="btn">
+			<span class="text text-1">Choose plan</span>
+			<span class="text text-2" aria-hidden>Choose plan</span>
+		</a>
+			</div>
+		</div>
+
+
+		<div class="box">
+			<div class="image shine">
+				<img src="{% static 'representative.png' %}" alt="">
+				<h3>Representaive</h3>
+			</div>
+			<div class="content">
+				<h4> $30,000</h4>
+				<p>Maximum: $79,999</p>
+				<h3>Representaive Plan</h3>
+				<div class="stars">
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+					<span>(Profit:14%)</span>
+				</div>
+				<div class="icons">
+					<span><i class="far fa-bookmark"></i>67</span>
+					<span><i class="far fa-clock"></i>Duration: 24 HRS</span>
+				</div>
+
+				<a href="{% url 'invest:representative' %}" class="btn">
+			<span class="text text-1">Choose plan</span>
+			<span class="text text-2" aria-hidden>Choose plan</span>
+		</a>
+			</div>
+		</div>
+
+
+		<div class="box">
+			<div class="image shine">
+				<img src="{% static 'finale.png' %}" alt="">
+				<h3>Finale</h3>
+			</div>
+			<div class="content">
+				<h4> $80,000</h4>
+				<p>Maximum: Unlimited</p>
+				<h3>Finale Plan</h3>
+				<div class="stars">
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star"></i>
+					<i class="fas fa-star-half-alt"></i>
+					<span>(Profit:17%)</span>
+				</div>
+				<div class="icons">
+					<span><i class="far fa-bookmark"></i>67</span>
+					<span><i class="far fa-clock"></i>Duration: 24 HRS</span>
+				</div>
+
+				<a href="{% url 'invest:finale' %}" class="btn">
+			<span class="text text-1">Choose plan</span>
+			<span class="text text-2" aria-hidden>Choose plan</span>
+		</a>
+			</div>
+		</div>
+	</div>
+
+	</section>
+<!-- plans ends her -->
+
+<!-- chat with us starts here -->
+<section class="chat" id="chat">
+	<h1 class="heading">Send us a message</h1>
+	<div class="row">
+		<div class="image">
+		<img src="{% static 'customer.png' %}" alt="">
+		</div>
+	
+
+	<form method ="POST" action="">
+		<h3>We will be happy to hear from you</h3>
+		{% csrf_token %}
+		{{form.name}}
+		{{form.email}}
+		{{form.message}}
+
+		
+		<input type="submit" value="Send" class="btn">
+		<!-- <a href="#" class="btn">
+			<span class="text text-1">Send</span>
+			<span class="text text-2" aria-hidden="true">Send</span>
+		</a> -->
+
+		
+	</form>
+	</div>
+	
+</section>
+
+<!-- chat with us ends here -->
+
+<!-- footer starts here -->
+<section class="footer">
+	<div class="box-container">
+		<div class="box">
+			<h3>Find Us Here</h3>
+			<p>You can find us through the following link icon of the diifferent social handles below</p>
+			<div class="share">
+				<a href="#" class="fab fa-facebook-f"></a>
+				<a href="#" class="fab fa-twitter"></a>
+				<a href="#" class="fab fa-instagram"></a>
+			</div>
+		</div>
+
+		<div class="box">
+			<h3>Contact Us</h3>
+			<p>+123456789</p>
+			<a href="#" class="link">comeseeme@gmail.com</a>
+		</div>
+
+		<div class="box">
+			<h3>Office</h3>
+			<p>20 road street assumption plaza<br>
+				Texas Jungle<br>
+			United States</p>
+		</div>
+	</div>
+
+	<div class="credit"><span>Nexton</span>
+	</div>
+</section>
+<!-- footer ends here -->
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

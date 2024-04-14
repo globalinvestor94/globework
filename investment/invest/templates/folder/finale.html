@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Investors</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}">
+</head>
+
+
+<!-- header secttion -->
+<header class="header">
+    <a href="#" class="logo"><i class="fa fa-fire"></i>Global Investors</a>
+    <div class="icons">
+        <a href="{% url 'invest:home' %}" name="register" id="sign-btn" class="fas fa-home"></a>
+    </div>
+    
+</header>
+
+<body>
+
+<main class="table">
+    <section class="table_header">
+        <h1>Global Investors</h1>
+    </section>
+
+    <section class="table_body">
+        {% if request.user.is_authenticated %}
+        <div class="name-content">
+
+                <p><b>User: </b><span>{{request.user.username}}</span></p>
+                <p><b>Plan: </b><span>Finale Plan</span></p>
+                <form method="POST" action="" id="amountCoin">
+                    {% csrf_token %}
+                <p><b>Investment Amount: </b><span id="amountPass">$ {{form.amount}}</span></p>
+                <p><b>Bar code/Wallet Address </b><span>
+
+                    {{form.coin}}    
+            </span></p>
+            
+                
+            </div>
+    
+
+
+        <div class="user-content">
+            <div id="Bitcoin" class="data">
+            <img class="image" src="{% static 'barcode/btc.jpg' %}"><br>
+            <input type="submit" value="Invest" class="proceed" onclick="submitTxt()">
+            </div>
+            <div id="Ethurum" class="data">
+            <img class="image" src="{% static 'barcode/eth.jpg' %}"><br>
+            <input type="submit" value="Invest" class="proceed" onclick="submitTxt()">
+            </div>
+            <div id="BnB" class="data">
+            <img class="image" src="{% static 'barcode/bnb.jpg' %}"><br>
+            <input type="submit" value="Invest" class="proceed" onclick="submitTxt()">
+            </div>
+            <div id="USDT_TRON" class="data">
+            <img class="image" src="{% static 'barcode/usdt_tron.jpg' %}"><br>
+            <input type="submit" value="Invest" class="proceed" onclick="submitTxt()">
+            </div>
+            <div id="USDT ERC20" class="data">
+            <img  class="image" src="{% static 'barcode/usdt_eth.jpg' %}"><br>
+            <input type="submit" value="Invest" class="proceed" onclick="submitTxt()">
+            </div>
+
+            
+        </div>
+        </form>
+        <div class="table-container">
+        <h1 class="heading">Investment History</h1>
+
+
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th>User</th>
+                    <th>Plan</th>
+                    <th>Amount</th>
+                    <th>Interest reci.</th>
+                    <th>Reward</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for finale in finale %}
+                <tr>
+                    
+                    <td data-label="User">{{request.user.username}}</td>
+                    <td data-label="Plan">Finale plan</td>
+                    <td data-label="Amount" id="amount" readonly>${{finale.amount}}</td>
+                    <td data-label="Interest reci." >17%</td>
+                    <td data-label="Reward">{{finale.finale_amount}}</td>
+                    <td data-label="Status" style="background: red; border-radius: 4px; color: white;">{{finale.status}}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        {% endif %}
+    </section>
+    
+</main>
+<!-- footer starts here -->
+<section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>Find Us Here</h3>
+            <p>You can find us through the following link icon of the diifferent social handles below</p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>Contact Us</h3>
+            <p>+123456789</p>
+            <a href="#" class="link">comeseeme@gmail.com</a>
+        </div>
+
+        <div class="box">
+            <h3>Office</h3>
+            <p>20 road street assumption plaza<br>
+                Texas Jungle<br>
+            United States</p>
+        </div>
+    </div>
+
+    <div class="credit"><span>Nexton</span>
+    </div>
+</section>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>
+    $(".data").hide();
+$("#id_coin").change(function(){
+    $('.data').hide()
+    $('#' + this.value).show();
+});
+
+$(document).on('submit', '#amountCoin', function(e){
+    e.preventDefault();
+    $.ajax({
+        type:"POST",
+        url:"{% url 'invest:finale' %}",
+        data:
+        {
+            amount:$('#id_amount').val(),
+            coin:$('#id_coin').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(){
+            alert('Investment is been processed');
+        }
+    });
+});
+
+
+
+$(document).ready(function(){
+      $(".proceed").click(function(){
+      $(".table-container").show();
+    
+});
+});
+
+// function submitTxt(){
+//     let $amt = $('#amountPass').clone();
+//     $('#amount').append($amt);
+// };
+
+$("input[type=number]").addClass('amountBox');
+
+$("input[type=number]").attr({"min":80000})
+
+
+</script>
+</body>
+</html>

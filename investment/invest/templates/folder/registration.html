@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Global Investors | Registration Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reg.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}">
+</head>
+
+<body>
+	
+
+<div class="container">
+<div class="large">
+<div class="form signup">
+    <span class="title">Registration Page</span>
+    <form action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+        {{form.errors}}
+        <div class="input-field">
+            {{form.username}}
+            <!-- <input type="text" placeholder="Enter your Username"  value="{{form.username.value|default_if_none:''}}" required=""> -->
+            <i class="fa fa-user-plus icon"></i>
+        </div>
+
+        <div class="input-field">
+            {{form.first_name}}
+        <!-- <input type="text" placeholder="Enter your First Name"  value="{{form.first_name.value|default_if_none:''}}" required=""> -->
+        <i class="fa fa-user icon"></i>
+    </div>
+
+    <div class="input-field">
+        {{form.last_name}}
+        <i class="fa fa-user icon"></i>
+    </div>
+
+    <div class="input-field">
+        {{form.email}}
+        <!-- <input type="text" placeholder="Enter your Email" value="{{form.email.value|default_if_none:''}}" required> -->
+        <i class="fa fa-envelope icon"></i>
+    </div>
+
+    <div class="input-field">
+        {{form.password1}}
+        <!-- <input type="text" class="password" placeholder="Enter your Password" value="{{form.password1.value|default_if_none:''}}" required> -->
+        <i class="fa fa-lock icon"></i>
+        <i class="fa fa-eye-slash showHidePw"></i>
+    </div>
+
+
+    <div class="input-field">
+        {{form.password2}}
+        {{form.errors}}
+        <!-- <input type="password" class="password" placeholder="Repeat your Password" value="{{form.password2.value|default_if_none:''}}" required> -->
+        <i class="fa fa-lock icon"></i>
+        <i class="fa fa-eye-slash showHidePw"></i>
+    </div>
+
+
+
+    <div class="input-field button">
+        <input type="submit" value="Register">
+    </div>
+    </form>
+
+    <div class="login-signup">
+        <span class="text">Already Registered?</span>
+        <a href="{% url 'invest:login' %}" class="text login-link">Login</a>
+    </div>
+</div>
+</div>
+</div>
+</body>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>
+const container = document.querySelector(".container"),
+    PwShowHide = document.querySelectorAll(".showHidePw"),
+    pwFields = document.querySelectorAll("#id_password1"),
+    pwFields2 = document.querySelectorAll("#id_password2"),
+    signUp = document.querySelector(".signup-link"),
+    login = document.querySelector(".login-link");
+
+        PwShowHide.forEach(eyeIcon=>{
+            eyeIcon.addEventListener("click",()=>{
+                pwFields.forEach(pwField=>{
+                    if(pwField.type === 'id_password1'){
+                        pwField.type = "text";
+
+                        PwShowHide.forEach(icon =>{
+                            icon.classList.replace('fa-eye-slash', 'fa-eye');
+                        })
+                    }else{
+                        pwField.type = 'id_password1';
+
+                        PwShowHide.forEach(icon =>{
+                            icon.classList.replace('fa-eye', 'fa-eye-slash');
+                        })
+                    }
+                })
+            })
+        });
+
+        PwShowHide.forEach(eyeIcon=>{
+            eyeIcon.addEventListener("click",()=>{
+                pwFields2.forEach(pwField=>{
+                    if(pwField.type === 'id_password2'){
+                        pwField.type = "text";
+
+                        PwShowHide.forEach(icon =>{
+                            icon.classList.replace('fa-eye-slash', 'fa-eye');
+                        })
+                    }else{
+                        pwField.type = 'id_password2';
+
+                        PwShowHide.forEach(icon =>{
+                            icon.classList.replace('fa-eye', 'fa-eye-slash');
+                        })
+                    }
+                })
+            })
+        });
+
+        $("#id_username").attr("placeholder", "Type your Username..");
+        $("#id_first_name").attr("placeholder", "Type your First Name..");
+        $("#id_last_name").attr("placeholder", "Type your Last Name..");
+        $("#id_email").attr("placeholder", "Type your Email Address..");
+        $("#id_password1").attr("placeholder", "Type your Password..");
+        $("#id_password2").attr("placeholder", "Repeat Password..");
+    
+
+        
+</script>
+</html>
