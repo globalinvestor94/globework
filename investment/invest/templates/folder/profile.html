@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Global Investors</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}">
+</head>
+
+
+<!-- header secttion -->
+<header class="header">
+	<a href="#" class="logo"><i class="fa fa-fire"></i>Global Investors</a>
+	<div class="icons">
+		<a href="{% url 'invest:home' %}" name="register" id="sign-btn" class="fas fa-home"></a>
+	</div>
+	
+</header>
+
+<body>
+<section class="learnMore">
+<h2 class="heading">Your Profile</h2>
+
+
+<section class="table_body">
+        {% if request.user.is_authenticated %}
+        <div class="name-content">
+
+                <p><b>User: </b><span>{{request.user.username}}</span></p>
+                <p><b>First Name: </b><span>{{request.user.first_name}}</span></p>
+                <p><b>Last Name: </b><span>{{request.user.last_name}}</span></p>
+                <p><b>Email: </b><span>{{request.user.email}}</span></p>
+                <p><b>Referred: </b><span>
+
+                	{% if my_rec %}
+                	{% for p in my_rec %}
+					{{p.user}}
+					{% endfor %}
+
+
+					{% else %}
+					You did not refer anyone!!!
+
+					
+				
+
+				{%  endif %}
+                </span></p>
+                <p><b>Refereal Link: </b><span id="copy-text">127.0.0.1:800/{{profile.code}}  <i class="fa fa-copy" id="copy-icon" style="width:40px; height: 35px; color:blue; cursor: pointer;"></i></span></p>
+                <p></b><span></span></p>
+            </div>
+            {% endif %}
+
+</section>
+</section>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>
+	$(document).ready(function(){
+		$('#copy-icon').click(function(){
+			var TexttoCopy = $('#copy-text').text();
+			var TeztArea = $('<textarea>');
+			$('body').append(TeztArea);
+			TeztArea.val(TexttoCopy).select();
+
+			document.execCommand('copy')
+			TeztArea.remove()
+			
+            alert('Your referal links is copied');
+        
+		});
+		
+	});
+</script>
+</body>
+</html>

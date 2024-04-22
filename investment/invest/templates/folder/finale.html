@@ -30,7 +30,10 @@
     <section class="table_body">
         {% if request.user.is_authenticated %}
         <div class="name-content">
+                {% if count_invest > 2 %}
+            <p>You cannot make any investment, as you are allowed only two investment. please contact our help center</p>
 
+            {% else %}
                 <p><b>User: </b><span>{{request.user.username}}</span></p>
                 <p><b>Plan: </b><span>Finale Plan</span></p>
                 <form method="POST" action="" id="amountCoin">
@@ -41,7 +44,7 @@
                     {{form.coin}}    
             </span></p>
             
-                
+                {% endif %}
             </div>
     
 

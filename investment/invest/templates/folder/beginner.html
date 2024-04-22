@@ -30,6 +30,10 @@
     <section class="table_body">
         {% if request.user.is_authenticated %}
         <div class="name-content">
+            {% if count_invest > 2 %}
+            <p>You cannot make any investment, as you are allowed only two investment. please contact our help center</p>
+
+            {% else %}
 
                 <p><b>User: </b><span>{{request.user.username}}</span></p>
                 <p><b>Plan: </b><span>Beginners Plan</span></p>
@@ -41,10 +45,9 @@
                     {{form.coin}}    
             </span></p>
             
-                
+                {% endif %}
             </div>
     
-
 
         <div class="user-content">
             <div id="Bitcoin" class="data">
@@ -67,6 +70,7 @@
             <img  class="image" src="{% static 'barcode/usdt_eth.jpg' %}"><br>
             <input type="submit" value="Invest" class="proceed" onclick="submitTxt()">
             </div>
+            
 
             
         </div>
@@ -181,7 +185,7 @@ $(document).ready(function(){
 
 $("input[type=number]").addClass('amountBox');
 
-$("input[type=number]").attr({"max":1999, "min":100})
+$("input[type=number]").attr({"max":2999, "min":100})
 
 
 </script>

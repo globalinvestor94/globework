@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import InvestBeginner,InvestProfessional,InvestPromo, InvestRep,InvestFinale
+from .models import InvestBeginner,UserReferal, InvestProfessional,InvestPromo, InvestRep,InvestFinale
 
 class BeginnerForm(forms.ModelForm):
     class Meta:
@@ -82,3 +82,9 @@ class EmailForm(forms.Form):
 	name = forms.CharField(max_length=60)
 	email = forms.EmailField()
 	message = forms.CharField(widget=forms.Textarea)
+
+
+# class ReferralForm (forms.ModelForm):
+#     class Meta:
+#         model = UserReferal
+#         fields = ["referal_code"]

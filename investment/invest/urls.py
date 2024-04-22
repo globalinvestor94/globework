@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  GlobalView,Signup,AboutView,Login,logoutUser,detailView, beginnerPlan, professionalPlan, representativePlan, promoPlan, finalePlan
+from .views import  GlobalView,Signup,Profile, AboutView,Login,logoutUser,detailView, beginnerPlan, professionalPlan, representativePlan, promoPlan, finalePlan
 from django.views.generic import ListView
 from django.contrib.auth import views as auth_views
 # from . views import *
@@ -8,10 +8,12 @@ from django.contrib.auth import views as auth_views
 app_name = 'invest'
 urlpatterns =[ 
 path(r'', GlobalView, name='home'),
-path(r'learn_more', detailView, name='learnmore'), 
+path(r'<str:ref_code>/', GlobalView, name='home'),
+path(r'learn_more', detailView, name='learnmore'),
+path(r'user_profile', Profile, name='profile'), 
 path(r'register', Signup, name='register'),
 path(r'login', Login, name='login'),
-path('logout/', logoutUser, name='logout'),
+path('logout', logoutUser, name='logout'),
 path(r'beginner_plan', beginnerPlan, name='beginner'),
 path(r'professional_plan', professionalPlan, name='professional'),
 path(r'representative_plan', representativePlan, name='representative'),

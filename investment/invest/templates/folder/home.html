@@ -20,11 +20,15 @@
 		<a href="#about" class="hover-underline">About Us</a>
 		<a href="#testimony" class="hover-underline">Testimonies</a>
 		<a href="#plan" class="hover-underline">Plan</a>
+		<a href="#referal" class="hover-underline">Referral</a>
 		<a href="#chat" class="hover-underline">Chat wih Us</a>
 	</nav>
 	{% if request.user.is_authenticated %}
 	<div class="icons">
 		<a href="{% url 'invest:logout' %}" id="sign-btn" class="fa fa-external-link"><span style="font-size:1rem">Logout</span></a>
+
+		<a href="{% url 'invest:profile' %}" id="sign-btn" class="fa fa-address-book"><span style="font-size:1rem">Profile</span></a>
+
 		<a href="" style="font-size: 1rem">Welcome {{request.user.username}}</a>
 		<a href="#" id="menu-btn" class="fas fa-bars"> </a>
 	</div>
@@ -180,7 +184,7 @@
 			</div>
 			<div class="content">
 				<h4> $100</h4>
-				<p>Maximum: $1,999</p>
+				<p>Maximum: $2,999</p>
 				<h3>Beginners Plan</h3>
 				<div class="stars">
 					<i class="fas fa-star"></i>
@@ -324,6 +328,27 @@
 
 	</section>
 <!-- plans ends her -->
+
+<!-- referal style start here -->
+<section class="referal" id="referal">
+	<h1 class="heading">Referral</h1>
+	<div class="row">
+		<div class="image">
+		<img src="{% static 'ref.png' %}" alt="">
+		</div>
+		<div class="write_ref">
+		<h3>Refer and Benfit</h3>
+		<p style="font-size:1.5rem; line-height: 1.8rem; text-align:justify;"> Global investors offer incentive for both the referrer and the referred. by sharing a link user will earn rewards such as 20% additional interest rate. this platform will also build credibility and trust. By recommending this platform, it proves to show our efforst to making lives better. </p>
+		
+		<a href="{% url 'invest:profile' %}" class="btn">
+			<span class="text text-1">Referral</span>
+			<span class="text text-2" aria-hidden="true">Referral</span>
+		</a>
+		</div>
+		
+	</div>
+</section>
+<!-- referal ends here -->
 
 <!-- chat with us starts here -->
 <section class="chat" id="chat">

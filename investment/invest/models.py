@@ -2,6 +2,9 @@ from django.db import models
 import random
 from django.utils import timezone
 from django.conf import settings
+from .utils import generate_ref_code
+from django.contrib.auth.models import User
+
 
 CHOICES = [
 	('Select Coin','Select Coin'),
@@ -101,3 +104,25 @@ class InvestFinale(models.Model):
 		return self.amount * 17 /100 + self.amount
 # Create your models here.
 
+
+class UserReferal (models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="referrals")
+	code = models.CharField(max_length=12, blank=True)
+	recommeded_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="referred_by")
+	updated = models.DateTimeField(auto_now=True)
+	created = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return f"{self.user.username}"
+
+	def get_recommended_profiles(self):
+		query = UserReferal.objects.all()
+		my_rec = [ur for ur in query if ur.recommeded_by == self.user]
+		return my_rec
+
+
+	def save(self, *args, **kwargs):
+		if self.code == "":
+			code = generate_ref_code()
+			self.code = code
+		super().save(*args, **kwargs)

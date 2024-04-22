@@ -711,6 +711,55 @@ select #id_coin option{
 
 /*footer ends here */
 
+/*referal stling starts here*/
+.referal .row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.referal .row .image{
+    flex: 1 1 40rem;
+}
+
+.referal .row .image img{
+    width: 100%;
+}
+
+.referal .row .write_ref{
+    flex: 1 1 40rem;
+    border: 0.1rem solid var(--primary-color);
+    padding: 2rem;
+}
+
+.referal .row .write_ref h3{
+    font-size: 2.5rem;
+    color: #444;
+    padding-bottom: 1rem;
+}
+
+.referal .row .write_ref .box{
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 1.2rem 1.4rem;
+    border: .1rem solid var(--primary-color);
+    margin: .7rem 0;
+}
+
+.referal .row .write_ref .box:focus{
+    color: var(--primary-color);
+}
+
+.referal .row .write_ref textarea{
+    height: 15rem;
+    resize: none;
+}
+
+
+/*referal styling ends here*/
+
+
 
 /*chat with us starts here*/
 .chat .row{
